@@ -1,0 +1,3 @@
+pip install SpeechRecognition pyttsx3 Flask
+pip install pyautogui
+pip install flask-cors
