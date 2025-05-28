@@ -2,11 +2,14 @@ import speech_recognition as sr
 import pyttsx3
 from flask import Flask, request
 import webbrowser
-import pyautogui
 from flask_cors import CORS
 from dotenv import load_dotenv
-import os
 import google.generativeai as genai
+import os
+
+if os.environ.get('DISPLAY'):
+    import pyautogui
+
 
 
 load_dotenv()
