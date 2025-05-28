@@ -4,6 +4,14 @@ from flask import Flask, request
 import webbrowser
 import pyautogui
 from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+import google.generativeai as genai
+
+
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY) 
 
 app = Flask(__name__)
 CORS(app)
@@ -32,7 +40,17 @@ def process_text():
         webbrowser.open(f"https://www.google.com/search?q={query}")
         speak(f"Searching for {query}.")
     else:
-        speak("I couldn't understand that. Please try again.")
+        prompt = f"You are a helpful assistant. User said: '{text}'. Respond appropriately."
+        try:
+            model = genai.GenerativeModel('gemini-2.0-flash')
+            response = model.generate_content(prompt)
+            ai_reply = response.text.strip()
+            speak(ai_reply)
+            return {'response': ai_reply}
+        except Exception as e:
+            error_msg = "Sorry, I couldn't process your request."
+            speak(error_msg)
+            return {'response': error_msg}
 
     return {'response': 'Task completed'}
 
