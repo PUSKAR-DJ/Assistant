@@ -19,7 +19,7 @@ A simple personal assistant web app that accepts text or voice commands, opens a
 ### 1. Clone the Repository
 
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/PUSKAR-DJ/Assistant.git
 cd Assistant
 ```
 
@@ -31,10 +31,11 @@ pip install -r requirements.txt
 
 ### 3. Set Up Your Gemini API Key
 
-- Create a `.env` file in the project root (already included in this repo):
-  ```
-  GEMINI_API_KEY=your_actual_gemini_api_key_here
-  ```
+- Create a `.env` file in the project root:
+  
+```
+New-Item -Path ".env" -ItemType File -Value "GEMINI_API_KEY=your_actual_gemini_api_key_here"
+```
 - **Never share your API key publicly!**
 
 ### 4. Run the Backend
